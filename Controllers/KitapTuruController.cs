@@ -34,6 +34,25 @@ namespace MvcProje.Controllers
             }
             return View();
         }
+        public IActionResult Guncelle(int? id)
+        {if(id==null || id == 0)
+            {
+                return NotFound();
+            }
+            KitapTuru kitapTuruVt = _uygulamaDbContext.KitapTurleri.Find(id);
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Guncelle(KitapTuru kitapTuru)
+        {
+            if (ModelState.IsValid)
+            {
+                _uygulamaDbContext.KitapTurleri.Add(kitapTuru);
+                _uygulamaDbContext.SaveChanges();//savechanges bilgiler veritabanına eklenmez
+                return RedirectToAction("Index", "KitapTuru");
+            }
+            return View();
+        }
 
 
     }
