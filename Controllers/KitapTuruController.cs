@@ -16,7 +16,25 @@ namespace MvcProje.Controllers
         {
             List<KitapTuru> objKitapTuruList = _uygulamaDbContext.KitapTurleri.ToList();
             
-     return View();
+            return View(objKitapTuruList);
         }
+        // new kitapturu add action page
+        public IActionResult Ekle()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Ekle(KitapTuru kitapTuru)
+        {
+            if (ModelState.IsValid)
+            {
+                _uygulamaDbContext.KitapTurleri.Add(kitapTuru);
+                _uygulamaDbContext.SaveChanges();//savechanges bilgiler veritabanına eklenmez
+                return RedirectToAction("Index", "KitapTuru");
+            }
+            return View();
+        }
+
+
     }
 }
