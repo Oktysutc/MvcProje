@@ -1,4 +1,9 @@
 ﻿@model List<KitapTuru>
+
+@if (TempData["basarili"] != null)
+{
+    <h2  style="max-height:6px; max-width:10px;">@TempData["basarili"]</h2>
+}
 <div class="=container">
     <div class="row pt-3 pb-4"
     <div>
@@ -18,12 +23,12 @@
     </thead>
     <tbody>
                 @foreach (var KitapTuru in Model)
-                {
+   {
                 <tr>
                     <td>@KitapTuru.Id</td>
                     <td>@KitapTuru.Ad</td>
-<td><a asp-controller="KitapTuru" asp-action="Guncelle" type="button" class="btn btn-success" style="width:150px;">güncelle</a></td>
-        <td><a asp-controller="KitapTuru" asp-action="Sil" type="button" class="btn btn-danger"style="width:150px;">sil</a></td>
+<td><a asp-controller="KitapTuru" asp-action="Guncelle" asp-route-id="@KitapTuru.Id" type="button" class="btn btn-success" style="width:150px;">güncelle</a></td>
+    <td><a asp-controller="KitapTuru" asp-action="Sil" asp-route-id="@KitapTuru.Id" type="button" class="btn btn-danger"style="width:150px;">sil</a></td>
                 </tr>
                 }
     </tbody>
