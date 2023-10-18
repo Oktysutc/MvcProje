@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using MvcProje.Models;
 using MvcProje.Utility;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<UygulamaDbContext>(Options=>
 Options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+// kitaptururepository dosyasýnýn olusturulmasýný saglar..==depencendy Injection
+builder.Services.AddScoped<IKitapTuruRepository,KitapTuruRepository>();
 
 var app = builder.Build();
 
