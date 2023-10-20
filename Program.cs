@@ -6,11 +6,17 @@ using MvcProje.Utility;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<UygulamaDbContext>(Options=>
 Options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 // kitaptururepository dosyasýnýn olusturulmasýný saglar..==depencendy Injection
-builder.Services.AddScoped<IKitapTuruRepository,KitapTuruRepository>();
+builder.Services.AddScoped<IKitapTuruRepository, KitapTuruRepository>();
+
+// 
+builder.Services.AddScoped<IKitapRepository, KitapRepository>();
+
 
 var app = builder.Build();
 

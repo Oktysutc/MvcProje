@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MvcProje.Utility;
 
@@ -10,9 +11,11 @@ using MvcProje.Utility;
 namespace MvcProje.Migrations
 {
     [DbContext(typeof(UygulamaDbContext))]
-    partial class UygulamaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231020114837_KitaplarTablosuEkle")]
+    partial class KitaplarTablosuEkle
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,13 +39,6 @@ namespace MvcProje.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("KitapTuruId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ResimUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Tanim")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -52,8 +48,6 @@ namespace MvcProje.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("KitapTuruId");
 
                     b.ToTable("Kitaplar");
                 });
@@ -74,17 +68,6 @@ namespace MvcProje.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("KitapTurleri");
-                });
-
-            modelBuilder.Entity("MvcProje.Models.Kitap", b =>
-                {
-                    b.HasOne("MvcProje.Models.KitapTuru", "KitapTuru")
-                        .WithMany()
-                        .HasForeignKey("KitapTuruId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("KitapTuru");
                 });
 #pragma warning restore 612, 618
         }

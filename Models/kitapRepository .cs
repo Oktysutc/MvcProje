@@ -2,17 +2,17 @@
 
 namespace MvcProje.Models
 {
-    public class KitapTuruRepository : Repository<KitapTuru>, IKitapTuruRepository
+    public class KitapRepository : Repository<Kitap>, IKitapRepository
     {
         private  UygulamaDbContext _uygulamaDbContext;
-        public KitapTuruRepository(UygulamaDbContext uygulamaDbContext) : base(uygulamaDbContext)
+        public KitapRepository(UygulamaDbContext uygulamaDbContext) : base(uygulamaDbContext)
         {
             _uygulamaDbContext = uygulamaDbContext;
         }
 
-        public void Guncelle(KitapTuru kitapTuru)
+        public void Guncelle(Kitap kitap)
         {
-            _uygulamaDbContext.Update(kitapTuru);
+            _uygulamaDbContext.Update(kitap);
         }
 
         public void Kaydet()
