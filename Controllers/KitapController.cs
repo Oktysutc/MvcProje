@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using MvcProje.Models;
@@ -9,13 +10,22 @@ namespace MvcProje.Controllers
     public class KitapController:Controller
     {
         private readonly IKitapRepository _kitapRepository;
-        public KitapController(IKitapRepository context)
+        private readonly IKitapTuruRepository _kitapTuruRepository;
+        private readonly IKitapTuruRepository kitapTuruRepository;
+        public KitapController(IKitapRepository kitapRepository, IKitapTuruRepository kitapTuruRepository)
         {
-            _kitapRepository = context;
+            _kitapRepository = kitapRepository;
+            _kitapTuruRepository = kitapTuruRepository;
         }
         public IActionResult Index()
         {
             List<Kitap> objKitapList = _kitapRepository.GetAll().ToList();
+            IEnumerable<SelectListItem> KitapTuruList = _kitapTuruRepository.GetAll()
+                .Select(k => new SelectListItem
+            {
+                Text=k.Ad,
+                Value=k.Id.ToString()
+            });
 
             return View(objKitapList);
         }
