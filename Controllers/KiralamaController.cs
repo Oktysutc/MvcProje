@@ -7,17 +7,20 @@ using MvcProje.Utility;
 
 namespace MvcProje.Controllers
 {
-    public class KitapController:Controller
+    public class KiralamaController:Controller
     {
+        private readonly IKiralamaRepository _KiralamaRepository;
         private readonly IKitapRepository _kitapRepository;
-        private readonly IKitapTuruRepository _kitapTuruRepository;
-        private readonly IKitapTuruRepository kitapTuruRepository;
-        public readonly IWebHostEnvironment _webHostEnvironment;
+ public readonly IWebHostEnvironment _webHostEnvironment;
+        // private readonly IKiralamaRepository _kiralamaRepository;
+        //private readonly IKitapTuruRepository _kitapTuruRepository;
+        //private readonly IKitapTuruRepository kitapTuruRepository;
+       
 
-        public KitapController(IKitapRepository kitapRepository, IKitapTuruRepository kitapTuruRepository, IWebHostEnvironment webHostEnvironment)
+        public KiralamaController(IKiralamaRepository KiralamaRepository, IKitapRepository kitapRepository, IWebHostEnvironment webHostEnvironment)
         {
+            _KiralamaRepository = KiralamaRepository; // new kiralama repository !!!!
             _kitapRepository = kitapRepository;
-            _kitapTuruRepository = kitapTuruRepository;
             _webHostEnvironment = webHostEnvironment;
         }
         public IActionResult Index()
@@ -25,8 +28,8 @@ namespace MvcProje.Controllers
             // List<Kitap> objKitapList = _kitapRepository.GetAll().ToList();
             // IEnumerable<SelectListItem> KitapTuruList = _kitapTuruRepository.GetAll(includeProps:"KitapTuru")
             
-            List<Kitap> objKitapList = _kitapRepository.GetAll(includeProps: "KitapTuru").ToList();
-            return View(objKitapList);
+            List<Kiralama> objKiralamaList = _KiralamaRepository.GetAll(includeProps: "Kitap").ToList();
+            return View(objKiralamaList);
             /*
                 .Select(k => new SelectListItem
             {
@@ -41,37 +44,37 @@ namespace MvcProje.Controllers
         public IActionResult EkleGuncelle(int? id)
         {
 
-            IEnumerable<SelectListItem> KitapTuruList = _kitapTuruRepository.GetAll()
+            IEnumerable<SelectListItem> KitapList = _kitapRepository.GetAll()
                 .Select(k => new SelectListItem
                 {
-                    Text = k.Ad,
+                    Text = k.KitapAdi,
                     Value = k.Id.ToString()
                 });
-            ViewBag.KitapTuruList =KitapTuruList;
+            ViewBag.KitapList =KitapList;
             if (id==null || id == 0)
             {
                 return View();
             }
             else
             {
-                Kitap? kitapVt = _kitapRepository.Get(u => u.Id == id);
-                if (kitapVt == null)
+                Kiralama? KiralamaVt = _KiralamaRepository.Get(u => u.Id == id);
+                if (KiralamaVt == null)
                 {
                     return NotFound();
                 }
-                return View(kitapVt);
+                return View(KiralamaVt);
             }
             
         }
         [HttpPost]
-        public IActionResult EkleGuncelle(Kitap kitap, IFormFile? file)
+        public IActionResult EkleGuncelle(Kiralama Kiralama)
         {
             if (ModelState.IsValid)
             {
-                var errors = ModelState.Values.SelectMany(x => x.Errors);
+               // var errors = ModelState.Values.SelectMany(x => x.Errors);
                 string wwwRootPath = _webHostEnvironment.WebRootPath;
                 string kitapPath = Path.Combine(wwwRootPath, @"img");
-
+                /*
                 if (file !=null)
                 {
 
@@ -81,24 +84,24 @@ namespace MvcProje.Controllers
                         file.CopyTo(fileStream);
                     }
                     kitap.ResimUrl = @"\img\" + file.FileName;
-                }
-                if(kitap.Id==0)
+                } */
+                if(Kiralama.Id==0)
                 {
-                    _kitapRepository.Ekle(kitap);
-                    TempData["basarili"] = "yeni kitap  başarıyla oluşturuldu";
+                    _KiralamaRepository.Ekle(Kiralama);
+                    TempData["basarili"] = "yeni Kiralama işlemi  başarıyla oluşturuldu";
 
                 }
                 else
                 {
-                    _kitapRepository.Guncelle(kitap);
-                    TempData["basarili"] = " kitap güncelleme  başarıyla oluşturuldu";
+                    _KiralamaRepository.Guncelle(Kiralama);
+                    TempData["basarili"] = " Kiralama güncelleme  başarıyla oluşturuldu";
 
                 }
 
-                //_kitapRepository.Ekle(kitap);
-                _kitapRepository.Kaydet();//savechanges bilgiler veritabanına eklenmez
-                TempData["basarili"] = "yeni kitap  başarıyla oluşturuldu";
-                return RedirectToAction("Index", "Kitap");
+                //_KiralamaRepository.Ekle(kitap);
+                _KiralamaRepository.Kaydet();//savechanges bilgiler veritabanına eklenmez
+                TempData["basarili"] = "yeni Kiralama  başarıyla oluşturuldu";
+                return RedirectToAction("Index", "Kiralama");
             }
             return View();
         }
@@ -138,25 +141,25 @@ namespace MvcProje.Controllers
             {
                 return NotFound();
             }
-            Kitap? kitapVt = _kitapRepository.Get(u => u.Id == id);
-            if (kitapVt == null)
+            Kiralama? KiralamaVt = _KiralamaRepository.Get(u => u.Id == id);
+            if (KiralamaVt == null)
             {
                 return NotFound();
             }
-            return View(kitapVt);
+            return View(KiralamaVt);
         }
         [HttpPost,ActionName("Sil")]
         public IActionResult SilPOST(int? id)
         {
-            Kitap? kitap = _kitapRepository.Get(u => u.Id == id);
-            if (kitap == null)
+            Kiralama? Kiralama = _KiralamaRepository.Get(u => u.Id == id);
+            if (Kiralama == null)
             {
                 return NotFound();
             }
-            _kitapRepository.Sil(kitap);
-            _kitapRepository.Kaydet();
-            TempData["basarili"] = "yeni kitap başarıyla silindi";
-            return RedirectToAction("Index", "Kitap");
+            _KiralamaRepository.Sil(Kiralama);
+            _KiralamaRepository.Kaydet();
+            TempData["basarili"] = "yeni Kiralama başarıyla silindi";
+            return RedirectToAction("Index", "Kiralama");
 
         }
 

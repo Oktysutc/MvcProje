@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MvcProje.Models;
-
+// veri tabanında entity framewrok tablosu olusturması için ilgili model sınıflarınızı buraya eklemelisiniz
 namespace MvcProje.Utility
 {
     public class UygulamaDbContext:DbContext
@@ -10,5 +10,6 @@ namespace MvcProje.Utility
         
 
         public DbSet<Kitap> Kitaplar { get; set; }
+        public DbSet<Kiralama> Kiralamalar { get; set; }
     }
 }

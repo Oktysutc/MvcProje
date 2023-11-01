@@ -10,12 +10,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<UygulamaDbContext>(Options=>
 Options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
+// dikkat yeni bir repository sýnýfý olusturdugunuzda burada servislere eklemelisiniz
 // kitaptururepository dosyasýnýn olusturulmasýný saglar..==depencendy Injection
 builder.Services.AddScoped<IKitapTuruRepository, KitapTuruRepository>();
 
 // 
 builder.Services.AddScoped<IKitapRepository, KitapRepository>();
+builder.Services.AddScoped<IKiralamaRepository, KiralamaRepository>();
 
 
 var app = builder.Build();

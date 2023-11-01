@@ -11,8 +11,8 @@ using MvcProje.Utility;
 namespace MvcProje.Migrations
 {
     [DbContext(typeof(UygulamaDbContext))]
-    [Migration("20231020135926_ForeignKeyEkle")]
-    partial class ForeignKeyEkle
+    [Migration("20231027114244_reinstall")]
+    partial class reinstall
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -41,6 +41,10 @@ namespace MvcProje.Migrations
 
                     b.Property<int>("KitapTuruId")
                         .HasColumnType("int");
+
+                    b.Property<string>("ResimUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Tanim")
                         .IsRequired()

@@ -11,8 +11,8 @@ using MvcProje.Utility;
 namespace MvcProje.Migrations
 {
     [DbContext(typeof(UygulamaDbContext))]
-    [Migration("20231020141205_ResimUrlEkleme")]
-    partial class ResimUrlEkleme
+    [Migration("20231101084815_KiralamlarTablosuEkle")]
+    partial class KiralamlarTablosuEkle
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,6 +23,28 @@ namespace MvcProje.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("MvcProje.Models.Kiralama", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("KitapId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("OgrenciId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("KitapId");
+
+                    b.ToTable("Kiralamalar");
+                });
 
             modelBuilder.Entity("MvcProje.Models.Kitap", b =>
                 {
@@ -77,6 +99,17 @@ namespace MvcProje.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("KitapTurleri");
+                });
+
+            modelBuilder.Entity("MvcProje.Models.Kiralama", b =>
+                {
+                    b.HasOne("MvcProje.Models.KitapTuru", "Kitap")
+                        .WithMany()
+                        .HasForeignKey("KitapId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Kitap");
                 });
 
             modelBuilder.Entity("MvcProje.Models.Kitap", b =>

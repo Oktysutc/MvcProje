@@ -21,6 +21,28 @@ namespace MvcProje.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("MvcProje.Models.Kiralama", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("KitapId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("OgrenciId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("KitapId");
+
+                    b.ToTable("Kiralamalar");
+                });
+
             modelBuilder.Entity("MvcProje.Models.Kitap", b =>
                 {
                     b.Property<int>("Id")
@@ -74,6 +96,17 @@ namespace MvcProje.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("KitapTurleri");
+                });
+
+            modelBuilder.Entity("MvcProje.Models.Kiralama", b =>
+                {
+                    b.HasOne("MvcProje.Models.KitapTuru", "Kitap")
+                        .WithMany()
+                        .HasForeignKey("KitapId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Kitap");
                 });
 
             modelBuilder.Entity("MvcProje.Models.Kitap", b =>
