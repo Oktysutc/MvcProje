@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using MvcProje.Models;
@@ -6,6 +7,7 @@ using MvcProje.Utility;
 
 namespace MvcProje.Controllers
 {
+    [Authorize(Roles = UserRoles.Role_Admin)]//sadece bunun girmesini sağlar.
     public class KitapTuruController:Controller
     {
         private readonly IKitapTuruRepository _kitapTuruRepository;

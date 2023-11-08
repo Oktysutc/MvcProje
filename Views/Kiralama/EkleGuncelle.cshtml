@@ -6,6 +6,7 @@
 
 
     <div class="row>
+
         <div class="col-10">
             <div class="border p-3 mt-5">
                 <div class="row pb-3 ">
@@ -20,14 +21,13 @@
                 <div class="mb-3">
                     <label asp-for="OgrenciId" class="p-0"></label>
                     <input asp-for="OgrenciId" class="form-control" />
-                    <span asp-validation-for="OgrenciId" class="text-danger">lütfen burayı doldurunuz!!</span>
+                    <span asp-validation-for="OgrenciId"  class="text-danger">lütfen burayı doldurunuz!!</span><!--asp items koyulabilir duruma göre-->
                 </div>
                 <div class="mb-3">
                     <label asp-for="KitapId" class="p-0"></label>
                     <select asp-for="KitapId" asp-items="ViewBag.KitapList" class="form-select">
                     </select>
-
-                </div>
+                 </div>
                 
                 
             @if (Model != null)
@@ -40,6 +40,17 @@
             }
                 <a asp-controller="Kiralama" asp-action="Index" class="btn btn-lg btn-primary" style="width:250px;">kiralamalara geri dön</a>
             </div>
+            </div>
+            </div>
+            <div class="col-2">
+        @if (Model != null)
+        {
+                 <br><br />
+            <img src="@Model.Kitap.ResimUrl" width="100%"
+                 style="border-radius:7px; border:1px solid #bbb9b9" />
+        }
+            </div>
+            
     </form>
 
            

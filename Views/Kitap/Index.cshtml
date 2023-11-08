@@ -1,4 +1,5 @@
-﻿@model List<Kitap>
+﻿@using MvcProje.Utility;
+@model List<Kitap>
 
 @if (TempData["basarili"] != null)
 {
@@ -18,8 +19,10 @@
         <th>Yazar</th>
         <th>Fiyat</th>
         <th>KitapTuru</th>
+                @if (User.IsInRole(UserRoles.Role_Admin)) {
         <th></th>
         <th></th>
+        }
     </tr>
 
     </thead>
@@ -33,17 +36,30 @@
                     <td>@Kitap.Yazar</td>
                     <td>@Kitap.Fiyat</td>
                     <td>@Kitap.KitapTuru.Ad</td>
+
+
+
+                        @if (User.IsInRole(UserRoles.Role_Admin)){
+
+
 <td><a asp-controller="Kitap" asp-action="EkleGuncelle" asp-route-id="@Kitap.Id" type="button" class="btn btn-success" style="width:150px;">güncelle</a></td>
     <td><a asp-controller="Kitap" asp-action="Sil" asp-route-id="@Kitap.Id" type="button" class="btn btn-danger"style="width:150px;">sil</a></td>
-                </tr>
+} 
+
+
+</tr>
+                        }
                 }
     </tbody>
 
 </table>
+        @if (User.IsInRole(UserRoles.Role_Admin)){
     <div class="row pt-3 pb-2">
         <div>
     <a asp-controller="Kitap" asp-action="EkleGuncelle" class="btn btn-lg btn-primary" type="button">yeni kitap oluştur</a>
         </div>
+        
     </div>
+        }
 </div>
     

@@ -11,7 +11,12 @@
 
         <div class="mb-3">
             <label asp-for="OgrenciId" class="p-0"></label>
-            <input asp-for="OgrenciId" class="form-control" />
+            <input asp-for="OgrenciId"  disabled class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="KitapId" class="p-0"></label>
+            <select asp-for="KitapId" asp-items="ViewBag.KitapList" class="form-select">
+            </select>
         </div>
 
 

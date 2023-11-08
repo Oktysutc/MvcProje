@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -7,6 +8,7 @@ using MvcProje.Utility;
 
 namespace MvcProje.Controllers
 {
+     
     public class KitapController:Controller
     {
         private readonly IKitapRepository _kitapRepository;
@@ -20,6 +22,7 @@ namespace MvcProje.Controllers
             _kitapTuruRepository = kitapTuruRepository;
             _webHostEnvironment = webHostEnvironment;
         }
+        [Authorize(Roles ="Admin,Ogrenci")]//sadece bunun girmesini sağlar.
         public IActionResult Index()
         {
             // List<Kitap> objKitapList = _kitapRepository.GetAll().ToList();
@@ -38,6 +41,7 @@ namespace MvcProje.Controllers
             //return View(objKitapList);
         }
         // new kitap add action page
+        [Authorize(Roles = UserRoles.Role_Admin)]//sadece bunun girmesini sağlar.
         public IActionResult EkleGuncelle(int? id)
         {
 
@@ -64,6 +68,7 @@ namespace MvcProje.Controllers
             
         }
         [HttpPost]
+        [Authorize(Roles = UserRoles.Role_Admin)]//sadece bunun girmesini sağlar.
         public IActionResult EkleGuncelle(Kitap kitap, IFormFile? file)
         {
             if (ModelState.IsValid)
@@ -132,6 +137,7 @@ namespace MvcProje.Controllers
         }
         */
         // get action 
+        [Authorize(Roles = UserRoles.Role_Admin)]//sadece bunun girmesini sağlar.
         public IActionResult Sil(int? id)
         {
             if (id == null || id == 0)
@@ -146,6 +152,7 @@ namespace MvcProje.Controllers
             return View(kitapVt);
         }
         [HttpPost,ActionName("Sil")]
+        [Authorize(Roles = UserRoles.Role_Admin)]//sadece bunun girmesini sağlar.
         public IActionResult SilPOST(int? id)
         {
             Kitap? kitap = _kitapRepository.Get(u => u.Id == id);

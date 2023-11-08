@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using MvcProje.Utility;
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -22,19 +23,35 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="KitapTuru" asp-action="Index">Kitap türü</a>
+                        
 
-                        </li>  <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Kitap" asp-action="Index">Kitap işlemleri</a>
-                        </li>
+                        @if (User.IsInRole(UserRoles.Role_Admin))
+                        {
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="KitapTuru" asp-action="Index">Kitap türü</a>
+
+                            </li>  <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Kitap" asp-action="Index">Kitap işlemleri</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Kiralama" asp-action="Index">Kiralama İşlemi</a>
+                            </li>
+                        }
+                        @if (User.IsInRole(UserRoles.Role_Ogrenci))
+                        {
+                             
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Kitap" asp-action="Index">Kitap işlemleri</a>
+                            </li>
+                        }
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Kiralama" asp-action="Index">Kiralama İşlemi</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">iletişim</a>
                         </li>
                     </ul>
+
+                    <partial name ="_LoginPartial"/>
+
                 </div>
             </div>
         </nav>
@@ -47,7 +64,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2023 - MvcProje - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2023 kasım - MvcProjem - <a asp-area="" asp-controller="Home" asp-action="Privacy">iletişim</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -7,6 +8,7 @@ using MvcProje.Utility;
 
 namespace MvcProje.Controllers
 {
+    [Authorize(Roles = UserRoles.Role_Admin)]//sadece bunun girmesini sağlar.
     public class KiralamaController:Controller
     {
         private readonly IKiralamaRepository _KiralamaRepository;
@@ -51,6 +53,7 @@ namespace MvcProje.Controllers
                     Value = k.Id.ToString()
                 });
             ViewBag.KitapList =KitapList;
+
             if (id==null || id == 0)
             {
                 return View();
@@ -137,6 +140,13 @@ namespace MvcProje.Controllers
         // get action 
         public IActionResult Sil(int? id)
         {
+            IEnumerable<SelectListItem> KitapList = _kitapRepository.GetAll()
+                .Select(k => new SelectListItem
+                {
+                    Text = k.KitapAdi,
+                    Value = k.Id.ToString()
+                });
+            ViewBag.KitapList = KitapList;
             if (id == null || id == 0)
             {
                 return NotFound();

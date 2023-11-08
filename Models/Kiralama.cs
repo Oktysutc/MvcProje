@@ -16,6 +16,7 @@ namespace MvcProje.Models
         [ForeignKey("KitapId")]
 
         [ValidateNever]
-        public KitapTuru Kitap{ get; set; }
+        public  Kitap Kitap{ get; set; }
+         
     }
 }

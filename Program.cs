@@ -2,22 +2,29 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using MvcProje.Models;
 using MvcProje.Utility;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<UygulamaDbContext>(Options=>
+builder.Services.AddDbContext<UygulamaDbContext>(Options =>
 Options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-// dikkat yeni bir repository sýnýfý olusturdugunuzda burada servislere eklemelisiniz
-// kitaptururepository dosyasýnýn olusturulmasýný saglar..==depencendy Injection
+
+builder.Services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<UygulamaDbContext>().AddDefaultTokenProviders();//demezseniz tokenÄ± bulamaz ekrana hata mesajÄ± atar yÄ±nede yapar ama
+
+builder.Services.AddRazorPages();
+
+// dikkat yeni bir repository sï¿½nï¿½fï¿½ olusturdugunuzda burada servislere eklemelisiniz
+// kitaptururepository dosyasï¿½nï¿½n olusturulmasï¿½nï¿½ saglar..==depencendy Injection
 builder.Services.AddScoped<IKitapTuruRepository, KitapTuruRepository>();
 
 // 
 builder.Services.AddScoped<IKitapRepository, KitapRepository>();
 builder.Services.AddScoped<IKiralamaRepository, KiralamaRepository>();
-
+builder.Services.AddScoped<IEmailSender, EmailSender>();
 
 var app = builder.Build();
 
@@ -35,6 +42,8 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+app.MapRazorPages();
 
 app.MapControllerRoute(
     name: "default",
