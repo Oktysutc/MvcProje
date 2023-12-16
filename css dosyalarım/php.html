@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iki sayıyı toplama</title>
+
+</head>
+
+<body>
+    <form method="post">
+        <label for="sayı1">birinci sayı</label>
+        <input type="number" name="sayi1" id="sayi1" required>
+        <br> <br>
+        <label for="sayi2">ikinci sayi</label>
+        <input type="number" name="sayı2" id="sayı2" required>
+        <br><br>
+        <button type="submit" name="topla">topla</button>
+    </form>
+    <php>
+        if(isset($_POST['topla'])){
+        $sayı1=$_POST['sayi1'];
+        $sayi2=$_POST['sayi2'];
+        $sonuc=$sayi1+$sayi2;
+        echo "toplam sonuç:".$sonuç;
+        }
+    </php>
+
+
+</body>
+
+</html>

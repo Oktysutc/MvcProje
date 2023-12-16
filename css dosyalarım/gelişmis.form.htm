@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h2{
+            font-style: italic;
+            background-color: beige;
+            margin: auto;
+            text-align: center;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+        label{
+            font-style: italic;
+            margin: auto;
+            position: relative;
+            text-align: center;
+            height: 50% 50% 50% 50%;
+            font-size: 15px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            
+
+        }
+    </style>
+</head>
+
+
+<body>
+    <form>
+    
+
+        <h2>form</h2>
+        <label for="username">kullanıcı adı</label>
+        <input type="text" id="username" name="username" required>
+        <br>
+        <label for="password">şifre</label>
+        <input type="password" id="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+            title="en az 8 karakter ve bir büyük harf kullanmak zorundasınız" required>
+        <br>
+        <label for="password-confirm">şifre tekrar</label>
+        <input type="password" id="password-confirm" name="password-confirm"
+            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+            title="en az 8 karakter ve bir büyük harf kullanmak zorundasınız" required>
+        <br>
+        <label for="email">mail</label>
+        <input type="email" name="email" id="email" required>
+        <br>
+        <label for="dog">doğum tarihi</label>
+        <input type="date" name="dog" id="dog" required>
+        <br>
+        <label for="gender">cinsiyet</label>
+        <select name="gender" id="gender" required>
+            <option value="seçiniz"></option>
+            <option value="male">erkek</option>
+            <option value="female">kadın</option>
+            <option value="other">oktay</option>
+        </select>
+        <br>
+        <label>üyelik türü</label><br>
+        <label><input type="radio" name="membership" value="standart" required>standart</label>
+        <label><input type="radio" name="membership" value="standart" required>premium</label>
+        <br>
+        <label><input type="checkbox" name="terms" value="agree" required>hizmet şartlarını okudum onaylıyorum</label>
+        <br>
+        <input type="submit" value="Gönder">
+        <input type="reset" value="sil">
+
+
+
+    </form>
+
+</body>
+
+</html>

@@ -1,0 +1,94 @@
+1.	Css sorusu 
+2.	<!DOCTYPE html>
+3.	<html lang="en">
+4.	<head>
+5.	    <meta charset="UTF-8">
+6.	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+7.	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+8.	    <title>Document</title>
+9.	    <style>
+10.	        body{
+11.	            margin: 0;
+12.	            padding: 0;
+13.	    }
+14.	    #wrapper{
+15.	        margin: auto;
+16.	        
+17.	
+18.	    }
+19.	    #header{
+20.	        max-width: 900px;
+21.	        height: 70px;
+22.	        border-color: gray;
+23.	        border-style:dotted;
+24.	        background-color: red;
+25.	
+26.	    }
+27.	    #nav{
+28.	        max-width: 900px;
+29.	        height: 50px;
+30.	        border-color: gray;
+31.	        border-style: dotted;
+32.	        background-color: yellow;
+33.	
+34.	}
+35.	#aside{
+36.	    float: left;
+37.	    width: 150px;
+38.	    min-height: 280px;
+39.	    border-color: chartreuse;
+40.	    border-style: dotted;
+41.	    background-color: blue;
+42.	}
+43.	#section{
+44.	    float: left;
+45.	    width: 740px;
+46.	    min-height: 280px;
+47.	    border-color: chartreuse;
+48.	    border-style: dotted;
+49.	}
+50.	#footer{
+51.	    float: left;
+52.	    min-height: 80px;
+53.	    min-width: 896px;
+54.	    border-color:chartreuse;
+55.	    border-style: dotted;
+56.	}
+57.	p{
+58.	    width: 60px;
+59.	            height: 20px;
+60.	           
+61.	           
+62.	            background-color: red;
+63.	            
+64.	            top: -15px;
+65.	            left: -1px;
+66.	            float:left;
+67.	            color: white;
+68.	            margin:auto;
+69.	}
+70.	    </style>
+71.	</head>
+72.	<body>
+73.	
+74.	    <div id="wrapper">
+75.	
+76.	    </div>
+77.	    <div id="header">
+78.	
+79.	    </div>
+80.	    <div id="nav">
+81.	<p>anasayfa</p>
+82.	    </div>
+83.	    <div id="anasayfa">
+84.	       
+85.	    </div>
+86.	    <div id="aside">
+87.	
+88.	    </div>
+89.	    <div id="section">
+90.	
+91.	    </div>
+92.	    <div id="footer">
+93.	
+94.	    </div>

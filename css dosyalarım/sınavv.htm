@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+
+<body>
+    <h4>
+        <form>
+            <h2>login form</h2>
+            <table border="1">
+
+                <label for="username">kullanıcı adı</label>
+
+
+                <input type="text" id="username" name="username" required>
+
+                <br>
+                <label for="password">şifre:</label>
+
+                <input type="password" id="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                    title="en az 8 karakter" required>
+                <br>
+
+                <label for="password-confirm">şifre tekrar</label>
+
+                <input type="password" id="password-confirm" name="password-confirm"
+                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="en az 8 karakter">
+                <br>
+                <label for="email">email</label>
+                <input type="email" id="email" name="email" required>
+                <br>
+                <label for="dob">dogum tarihi</label>
+                <input type="date" name="dob" id="dob" required>
+                <br>
+                <label for="gender"> cinsiyet</label>
+                <select name="gender" id="gender" required>
+
+                    <option value="seçiniz"></option>
+                    <option value="male">erkek</option>
+                    <option value="female">kadın</option>
+                    <option value="other">diğer</option>
+                </select>
+                <br>
+
+                <label>üyelik türü seçiniz</label>
+                <br>
+                <label><input type="radio" name="membership" value="standart" required>standart</label>
+                <label><input type="radio" name="membership" value="standart" required>premium</label>
+                <br>
+                <label><input type="checkbox" name="terms" value="agree" required>hizmet sartlarını onaylıyorum </label>
+                <br>
+                <input type="submit" value="gönder">
+                <br>
+
+        </form>
+    </h4>
+</body>
+
+</html>
